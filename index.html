@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script>
+      function enviar(e) {
+        e.preventDefault();
+        alert('enviar!');
+        return false;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <img src="images/logoaws.png">
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <form onsubmit="enviar(event)">
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                aria-describedby="emailHelp"
+                placeholder="Informe seu e-mail" />
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
