@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script>
+      function enviar(e) {
+        e.preventDefault();
+
+        content = {
+          email: $("#email").val()
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "/api/enviar",
+          data: JSON.stringify(content),
+          complete: function(data) {
+            html = "<h6>Request finalizado com status " + data.status + ", mensagem " + data.responseJSON.message + "</h6>"
+
+            if(data.responseJSON.items){
+              html += "<h5>E-mails cadastrados na base:</h5>"
+              html += "<table border=\"1\" style=\"width: 100%;\">"
+
+              data.responseJSON.items.forEach(function(item){
+                html += "<tr><td>" + item + "</td></tr>"
+              })
+  
+              html += "</table>"
+            }
+
+            $(".result").html(html);
+          },
+          contentType: "application/json",
+          dataType: "json"
+        });
+
+        return false;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <img src="images/logoaws.png" />
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <form onsubmit="enviar(event)">
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                aria-describedby="emailHelp"
+                placeholder="Informe seu e-mail"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-4 result"></div>
+      </div>
+    </div>
+  </body>
+</html>
